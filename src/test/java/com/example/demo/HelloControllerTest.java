@@ -15,8 +15,9 @@ class HelloControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    void helloEndpointReturnsGreeting() {
+    void helloEndpointReturnsGoogleHtml() {
         ResponseEntity<String> response = restTemplate.getForEntity("/hello", String.class);
-        assertThat(response.getBody()).isEqualTo("Hello, World!");
+        assertThat(response.getBody()).contains("<html");
+        assertThat(response.getBody()).contains("Google");
     }
 }

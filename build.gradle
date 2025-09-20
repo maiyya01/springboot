@@ -2,11 +2,30 @@ plugins {
     id 'org.springframework.boot' version '3.2.5'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'java'
+    id 'jacoco'
+
+
+    toolVersion = "0.8.10"
 }
 
 group = 'com.example'
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+    dependsOn test
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('reports/jacoco/test/html')
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
 
 defaultTasks 'bootRun'
 
@@ -19,7 +38,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testImplementation 'org.mockito:mockito-core:5.2.0'
-    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
 }
 
 test {

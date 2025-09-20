@@ -16,9 +16,10 @@ class HelloControllerUnitTest {
     private MockMvc mockMvc;
 
     @Test
-    void helloEndpointShouldReturnGreeting() throws Exception {
+    void helloEndpointShouldReturnGoogleHtml() throws Exception {
         mockMvc.perform(get("/hello"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello, World!"));
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("<html")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("Google")));
     }
 }
